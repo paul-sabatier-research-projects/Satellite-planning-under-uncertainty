@@ -1,0 +1,20 @@
+zimpl	v       0	selection#1   	"selection#1"
+zimpl	v       1	selection#2   	"selection#2"
+zimpl	v       2	selection#3   	"selection#3"
+zimpl	v       3	assignedTo#1#1	"assignedTo#1#1"
+zimpl	v       4	assignedTo#1#2	"assignedTo#1#2"
+zimpl	v       5	assignedTo#1#3	"assignedTo#1#3"
+zimpl	v       6	assignedTo#2#1	"assignedTo#2#1"
+zimpl	v       7	assignedTo#2#2	"assignedTo#2#2"
+zimpl	v       8	assignedTo#2#3	"assignedTo#2#3"
+zimpl	v       9	assignedTo#3#1	"assignedTo#3#1"
+zimpl	v      10	assignedTo#3#2	"assignedTo#3#2"
+zimpl	v      11	assignedTo#3#3	"assignedTo#3#3"
+zimpl	c       0	transition_1  	"transition_1"	0.0000000000000000e+00
+zimpl	c       1	transition_2  	"transition_2"	0.0000000000000000e+00
+zimpl	c       2	correspondan@2	"correspondancemono_1"	0.0000000000000000e+00
+zimpl	c       3	correspondan@3	"correspondancemono_2"	0.0000000000000000e+00
+zimpl	c       4	correspondan@4	"correspondancestereo1_1"	0.0000000000000000e+00
+zimpl	c       5	correspondan@5	"correspondancestereo2_1"	0.0000000000000000e+00
+zimpl	c       6	correspondan@6	"correspondancestereo3_1"	0.0000000000000000e+00
+zimpl	o       0	valeur        	"valeur"
