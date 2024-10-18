@@ -8,8 +8,6 @@ This project involves optimizing satellite planning under uncertain conditions u
 
 **ZIMPL** is a mathematical modeling language that helps in formulating optimization problems, which can then be solved using solvers like SCIP.
 
-### Installation Steps
-
 1. **Download the SCIP Optimization Suite**
 
    Download the `.deb` package for Ubuntu 22.04 from the official SCIP website:
@@ -24,12 +22,14 @@ This project involves optimizing satellite planning under uncertain conditions u
    sudo dpkg -i SCIPOptSuite-9.1.1-Linux-ubuntu22.deb
    ```
 
-   If you encounter any dependency issues, run: 
-   ```bash
+   If you encounter any dependency issues, run:
+
+   ``` bash
    sudo apt-get install -f
    ```
 
 3. **Test if It Works**
+
     ```bash
    $ scip
    SCIP version 9.1.1 [precision: 8 byte] [memory: block] [mode: optimized] [LP solver: Soplex 7.1.1] [GitHash: 66f11a6724]
@@ -47,4 +47,12 @@ This project involves optimizing satellite planning under uncertain conditions u
    *      ZIMPL comes with ABSOLUTELY NO WARRANTY     *
    ****************************************************
    ```
-   
+
+## Execution
+
+1. **Open a terminal.**
+2. **Execute the following commands to use SCIP:**
+   - Start SCIP: `scip`
+   - In SCIP, read the model file: `read tsp_solver.zpl`
+   - Optimize the problem: `optimize`
+   - Display the solution: `display solution`
