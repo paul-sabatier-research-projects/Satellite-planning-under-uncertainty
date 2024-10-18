@@ -6,7 +6,7 @@
 # Lecture des données d un pb spot dans le fichier specifié
 #############################################################
 
-param fichier := "spot1.tex" ;
+param fichier := "data/spot1.tex" ;
 
 param DU        :=  read fichier as "1n" comment "#" use 1 ;
 param VI        :=  read fichier as "1n" comment "#" skip 1 use 1 ;
