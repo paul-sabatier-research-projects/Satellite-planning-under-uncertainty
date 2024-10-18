@@ -53,6 +53,6 @@ This project involves optimizing satellite planning under uncertain conditions u
 1. **Open a terminal.**
 2. **Execute the following commands to use SCIP:**
    - Start SCIP: `scip`
-   - In SCIP, read the model file: `read tsp_solver.zpl`
+   - In SCIP, read the model file: `read spot.zpl`
    - Optimize the problem: `optimize`
    - Display the solution: `display solution`
