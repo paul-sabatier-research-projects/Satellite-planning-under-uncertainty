@@ -57,7 +57,7 @@ var selection[images]  binary;   # selection[i] = 1 <=> image i selectionnée
 var assignedTo[images*instruments]  binary; # assignedTo[i, j] = 1 <=> image i assignée à l'instrument j
 
 # Modification de la maximisation pour prendre en compte le PM et PA
-maximize valeur : sum <i> in images: selection[i] * (PA[i] + PM[i]);
+maximize valeur : sum <i> in images: selection[i] * (1.5*PA[i] + PM[i]);
 
 # Réduction des transitions inutiles et ajout de pondération pour les angles
 subto transition : 
