@@ -6,7 +6,7 @@
 # Lecture des données d un pb spot dans le fichier specifié
 #############################################################
 
-param fichier := "data/spot1.tex" ;
+param fichier := "data/spot4.tex" ;
 
 param DU        :=  read fichier as "1n" comment "#" use 1 ;
 param VI        :=  read fichier as "1n" comment "#" skip 1 use 1 ;
@@ -62,6 +62,10 @@ var assignedTo[images*instruments]  binary; #  assignedTo[i, j] = 1 <=>   image 
 
 maximize valeur : sum <i> in images: selection[i] * PA[i];
 
+# La mémoire totale utilisée par les images sélectionnées ne doit pas dépasser PMmax
+subto memory:
+    sum <i> in images: PM[i] * selection[i] <= PMmax ;
+
 subto transition : 
 forall <ima1, ima2,ins> in images*images*instruments 
                with ima1 < ima2  
@@ -85,7 +89,3 @@ subto correspondancestereo2:
 subto correspondancestereo3:
    forall <ima> in images     with type[ima]==2  :
       assignedTo[ima,3]== selection[ima] ;
-
-
-
-#
