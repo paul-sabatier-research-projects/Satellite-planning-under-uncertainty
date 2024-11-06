@@ -57,7 +57,13 @@ var selection[images]  binary;   # selection[i] = 1 <=> image i selectionnée
 var assignedTo[images*instruments]  binary; # assignedTo[i, j] = 1 <=> image i assignée à l'instrument j
 
 # Modification de la maximisation pour prendre en compte le PM et PA
-maximize valeur : sum <i> in images: selection[i] * (PA[i] - 0.3*PM[i]);
+# maximize valeur : sum <i> in images: selection[i] * (PA[i] - 0.3*PM[i]);
+
+# Calcul de la probabilité moyenne de nuages pour chaque image
+param Pcloud[images] := (Pinf[images] + Psup[images]) / 2; 
+
+# Fonction d'objectif avec ajustement des gains en fonction des nuages
+maximize valeur : sum <i> in images: selection[i] * PA[i] * (1 - Pcloud[i]);
 
 # Réduction des transitions inutiles et ajout de pondération pour les angles
 subto transition : 
@@ -80,3 +86,6 @@ forall <ima> in images with type[ima]==2  :
 subto maxCharge:
 forall <j> in instruments :
       sum <i> in images : assignedTo[i,j] * PM[i] <= PMmax;
+
+#maximize prix_total : sum <i> in images : selection[i] * PA[i];
+#do print "Prix total des images sélectionnées (PA) : ", prix_total;

@@ -14,10 +14,7 @@ param PMmax     :=  read fichier as "1n" comment "#" skip 2 use 1 ;
 param NbImages  :=  read fichier as "1n" comment "#" skip 3 use 1 ;
 param n         := 4;  # on vient de lire 4 images
 
-
 set images:= { 1..NbImages };
-
-
 
 param type[images]  := read fichier as "n+"  comment "#" skip  n;
 param PM[images]    := read fichier as "n+"  comment "#" skip  n +NbImages;
@@ -60,7 +57,15 @@ do forall <i> in images :  print "ins1 ", angle[i,1],  " ins2 ", angle[i,2],  " 
 var selection[images]  binary;   # selection[i] = 1 <=>   image i selectionnée
 var assignedTo[images*instruments]  binary; #  assignedTo[i, j] = 1 <=>   image  j   assignée à l'instrument j
 
-maximize valeur : sum <i> in images: selection[i] * PA[i];
+## Calcul du gain pondéré avec l'incertitude liée aux nuages
+# param Pclear[images] := (1 - (Pinf[images] + Psup[images]) / 2);  # Probabilité moyenne de ciel dégagé
+# param GainPondere[images] := PA[images] * Pclear[images];         # Gain pondéré en fonction de la probabilité de ciel dégagé
+
+## Fonction objectif : maximiser le gain pondéré espéré
+# maximize valeur : sum <i> in images: selection[i] * GainPondere[i];
+
+# Fonction d'objectif avec ajustement des gains en fonction des nuages
+maximize valeur : sum <i> in images: selection[i] * PA[i] * (1 - (Pinf[i] + Psup[i]) / 2);
 
 # La mémoire totale utilisée par les images sélectionnées ne doit pas dépasser PMmax
 subto memory:
