@@ -6,7 +6,7 @@
 # Lecture des données d un pb spot dans le fichier specifié
 #############################################################
 
-param fichier := "data/spot4.tex" ;
+param fichier := "data/spot5.tex" ;
 
 param DU        :=  read fichier as "1n" comment "#" use 1 ;
 param VI        :=  read fichier as "1n" comment "#" skip 1 use 1 ;
@@ -24,7 +24,7 @@ param Psup[images]  := read fichier as "n+"  comment "#" skip  n +NbImages*4;
 
 
 param Nbinstruments :=  read fichier as "1n" comment "#" skip  n +NbImages*5 use 1 ;
-set instruments     := { 1.. Nbinstruments };
+set instruments     := { 1..Nbinstruments };
 
 param Pfail[instruments]                := read fichier as "n+"  comment "#" skip  n +NbImages*5 + 1;
 param startDate[images*instruments]     := read fichier as "n+"  comment "#" skip n  +NbImages*5 + Nbinstruments + 1;
@@ -57,16 +57,11 @@ do forall <i> in images :  print "ins1 ", angle[i,1],  " ins2 ", angle[i,2],  " 
 var selection[images]  binary;   # selection[i] = 1 <=>   image i selectionnée
 var assignedTo[images*instruments]  binary; #  assignedTo[i, j] = 1 <=>   image  j   assignée à l'instrument j
 
-## Calcul du gain pondéré avec l'incertitude liée aux nuages
-# set Pclear[images] := 1 - (Pinf[images] + Psup[images]) / 2;  # Probabilité moyenne de ciel dégagé
-# set GainPondere[images] := PA[images] * Pclear[images];         # Gain pondéré en fonction de la probabilité de ciel dégagé
-
-## Fonction objectif : maximiser le gain pondéré espéré
-#maximize valeur : sum <i> in images: selection[i] * GainPondere[i];
 
 # Fonction d'objectif avec ajustement des gains
-maximize valeur : sum <i> in images, <j> in Nbinstruments: 
-    selection[i] * PA[i] * (1 - (Pinf[i] + Psup[i]) / 2) * assignedTo[i,j] * Pfail[j];
+maximize valeur : sum <i> in images :
+   sum <j> in instruments: 
+      selection[i] * PA[i] * (1 - (Pinf[i] + Psup[i]) / 2) * assignedTo[i,j] * (1 - Pfail[j]);
 
 # La mémoire totale utilisée par les images sélectionnées ne doit pas dépasser PMmax
 subto memory:
