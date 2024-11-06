@@ -58,14 +58,15 @@ var selection[images]  binary;   # selection[i] = 1 <=>   image i selectionnée
 var assignedTo[images*instruments]  binary; #  assignedTo[i, j] = 1 <=>   image  j   assignée à l'instrument j
 
 ## Calcul du gain pondéré avec l'incertitude liée aux nuages
-# param Pclear[images] := (1 - (Pinf[images] + Psup[images]) / 2);  # Probabilité moyenne de ciel dégagé
-# param GainPondere[images] := PA[images] * Pclear[images];         # Gain pondéré en fonction de la probabilité de ciel dégagé
+# set Pclear[images] := 1 - (Pinf[images] + Psup[images]) / 2;  # Probabilité moyenne de ciel dégagé
+# set GainPondere[images] := PA[images] * Pclear[images];         # Gain pondéré en fonction de la probabilité de ciel dégagé
 
 ## Fonction objectif : maximiser le gain pondéré espéré
-# maximize valeur : sum <i> in images: selection[i] * GainPondere[i];
+#maximize valeur : sum <i> in images: selection[i] * GainPondere[i];
 
-# Fonction d'objectif avec ajustement des gains en fonction des nuages
-maximize valeur : sum <i> in images: selection[i] * PA[i] * (1 - (Pinf[i] + Psup[i]) / 2);
+# Fonction d'objectif avec ajustement des gains
+maximize valeur : sum <i> in images, <j> in Nbinstruments: 
+    selection[i] * PA[i] * (1 - (Pinf[i] + Psup[i]) / 2) * assignedTo[i,j] * Pfail[j];
 
 # La mémoire totale utilisée par les images sélectionnées ne doit pas dépasser PMmax
 subto memory:
