@@ -61,7 +61,7 @@ var assignedTo[images*instruments]  binary; #  assignedTo[i, j] = 1 <=>   image 
 # Fonction d'objectif avec ajustement des gains
 maximize valeur : sum <i> in images :
    sum <j> in instruments: 
-      selection[i] * PA[i] * (1 - (Pinf[i] + Psup[i]) / 2) * assignedTo[i,j] * (1 - Pfail[j]);
+      selection[i] * PA[i] * (1 - (Pinf[i])) * assignedTo[i,j] * (1 - Pfail[j]);
 
 # La mémoire totale utilisée par les images sélectionnées ne doit pas dépasser PMmax
 subto memory:
