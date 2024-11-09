@@ -56,3 +56,13 @@ This project involves optimizing satellite planning under uncertain conditions u
    - In SCIP, read the model file: `read spot.zpl`
    - Optimize the problem: `optimize`
    - Display the solution: `display solution`
+
+## Acknowledgments
+
+This project was conducted as part of the course **KINX9AD1 - IA et Décision** under the supervision of Dr. Hélène Fargier. We extend our heartfelt thanks for her invaluable guidance and support throughout the development of this project.
+
+## License
+
+![License](https://img.shields.io/badge/License-MIT-blue.svg)
+
+This project is licensed under the [MIT License](LICENSE).
